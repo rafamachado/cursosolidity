@@ -7,7 +7,7 @@ This work is licensed under a Creative Commons Attribution 4.0 International Lic
 pragma solidity 0.8.19;
 /*
  Endereço do Contrato: 0xB4d6482860B9759F0268B5B20628c20687A4a03D
- 
+
 // OpenZeppelin Contracts v4.4.1 (token/ERC20/IERC20.sol)
 /**
  * @dev Interface of the ERC20 standard as defined in the EIP.
@@ -165,8 +165,8 @@ contract USDC is IERC20Metadata, Owned {
     }    
 
     constructor() {
-        myName = "BRL Aluno ";
-        mySymbol = "BRL@";
+        myName = "BRL aluno-19";
+        mySymbol = "BRL@aluno-19";
         myDecimals = 2;
         mint(msg.sender, (1000000000 * (10 ** myDecimals)));
     }
