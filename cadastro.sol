@@ -3,7 +3,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 pragma solidity 0.8.19;
 
-// Cadastro: 0x90bd50B003A79b8C99C402476D297A2cE50fa3ca
+// Endereco:  0x89A2E711b2246B586E51f579676BE2381441A0d0
 
 contract Cadastro {
 
