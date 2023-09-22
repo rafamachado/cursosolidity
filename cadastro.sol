@@ -52,11 +52,11 @@ contract Cadastro {
         return (cliente_, existe);
     }
 
-    function meuSaldo(address enderecoContrato) public view returns(uint){
+    function meuSaldo(address enderecoContrato) public view returns(uint256){
         return enderecoContrato.balance;
     }
 
-    function saldoAtualContrato() public view returns (uint) {
+    function saldoAtualContrato() public view returns (uint256) {
         return address(this).balance;
     }
 
