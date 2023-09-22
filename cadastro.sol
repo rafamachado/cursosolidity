@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: MIT
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
 pragma solidity 0.8.19;
 
 // Cadastro: 0x90bd50B003A79b8C99C402476D297A2cE50fa3ca
@@ -10,13 +12,19 @@ contract Cadastro {
         string primeiroNome;
         string sobreNome;
         address payable endereco; //0x0
-        bytes32 hashConta; // 0x0        
+        bytes32 hashConta; // 0x0  
         bool existe; //false
     }
 
+    IERC20 public token; 
     uint256 public totalClientes;
 
     Cliente[] public clientes;
+
+    modifier somenteCadastroRealizado() {        
+        require(clientes.length == 0, "Cadastro existente");
+        _;
+    }
 
     function addCliente(
         string memory _primeiroNome,
@@ -32,7 +40,7 @@ contract Cadastro {
 
         Cliente memory cliente = Cliente(totalClientes, _primeiroNome, _sobreNome, payable(address(custodiaTemp)), hashTemp, true);
         totalClientes++;
-        
+   
         clientes.push(cliente);
         
         return true;
@@ -42,6 +50,22 @@ contract Cadastro {
         cliente_ = clientes[_id];
         existe = cliente_.existe;
         return (cliente_, existe);
+    }
+
+    function meuSaldo(address enderecoContrato) public view returns(uint){
+        return enderecoContrato.balance;
+    }
+
+    function saldoAtualContrato() public view returns (uint) {
+        return address(this).balance;
+    }
+
+    function gerarTokenParaEuCliente(address _enderecoToken) 
+    external 
+    somenteCadastroRealizado()
+    returns(bool) {
+        token = IERC20(_enderecoToken);
+        return true;
     }
 
 }
