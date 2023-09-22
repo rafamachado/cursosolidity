@@ -6,7 +6,7 @@ This work is licensed under a Creative Commons Attribution 4.0 International Lic
 
 pragma solidity 0.8.19;
 /*
- Endereço hash: 0x89A2E711b2246B586E51f579676BE2381441A0d0
+ hash: 0x89A2E711b2246B586E51f579676BE2381441A0d0
 
 // OpenZeppelin Contracts v4.4.1 (token/ERC20/IERC20.sol)
 /**
@@ -218,6 +218,8 @@ contract ExercicioToken is IERC20Metadata, Owned {
     function transferFrom(address from, address to, uint256 amount) public override 
     hasEnoughBalance(from, amount) isAllowed(msg.sender, from, amount) tokenAmountValid(amount)
     returns(bool) {
+        require(balanceOf(from) >= amount, "Insufficient balance.");
+        require(ownerAllowances[from][msg.sender] >= amount, "Insufficient allowance.");
         balances[from] = balances[from] - amount;
         balances[to] += amount;
         ownerAllowances[from][msg.sender] = amount;
